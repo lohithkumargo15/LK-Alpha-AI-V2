@@ -1,19 +1,36 @@
-# ==========================================
-# File : choch.py
-#
-# Responsibility:
-# Detect Change of Character
-# ==========================================
+"""
+========================================================
 
-def check_choch(data):
+File : choch.py
 
-    # Temporary logic.
-    # Later this will use swing highs/lows.
+Purpose:
+Detect Change of Character (CHoCH)
 
-    if data.ema_9 > data.ema_20:
-        return "BULLISH"
+Developer : Lohith Kumar
 
-    elif data.ema_9 < data.ema_20:
+========================================================
+"""
+
+
+def check_choch(candles):
+
+    if len(candles) < 6:
+        return "NONE"
+
+    # Previous trend
+    previous_high = candles[-3]["high"]
+    previous_low = candles[-3]["low"]
+
+    # Latest candle
+    latest_high = candles[-1]["high"]
+    latest_low = candles[-1]["low"]
+
+    # Bullish CHoCH
+    if latest_low < previous_low:
         return "BEARISH"
+
+    # Bearish CHoCH
+    if latest_high > previous_high:
+        return "BULLISH"
 
     return "NONE"

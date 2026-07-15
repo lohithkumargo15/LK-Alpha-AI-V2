@@ -28,6 +28,10 @@ class MarketInput(BaseModel):
     ema_20: float
     vwap: float
     volume: int
+    volume_signal: str
     atr: float   
     bos: str
-    
+    choch: str
+    fvg: str
+    order_block: str
+    liquidity: str

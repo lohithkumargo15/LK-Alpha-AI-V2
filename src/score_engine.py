@@ -1,11 +1,21 @@
+"""
+========================================================
+
+File : score_engine.py
+
+Purpose:
+Calculate Bullish and Bearish Scores.
+
+Developer : Lohith Kumar
+
+========================================================
+"""
+
 from src.ema import check_ema
 from src.vwap import check_vwap
-from src.volume import check_volume
-from src.bos import check_bos
-from src.choch import check_choch
-from src.fvg import check_fvg
-from src.order_block import check_order_block
 from src.option_chain import check_option_chain
+
+from config.scores import SCORES
 
 
 def calculate_score(data):
@@ -13,73 +23,108 @@ def calculate_score(data):
     bullish_score = 0
     bearish_score = 0
 
+    # ==========================================
     # EMA
+    # ==========================================
 
     ema = check_ema(data)
 
     if ema == "BULLISH":
-        bullish_score += 25
+        bullish_score += SCORES["EMA"]
 
     elif ema == "BEARISH":
-        bearish_score += 25
+        bearish_score += SCORES["EMA"]
 
+    # ==========================================
     # VWAP
+    # ==========================================
 
-    vwap = check_vwap(data)
+    vwap = check_vwap(
+        data.ltp,
+        data.vwap
+    )
 
     if vwap == "BULLISH":
-        bullish_score += 20
+        bullish_score += SCORES["VWAP"]
 
     elif vwap == "BEARISH":
-        bearish_score += 20
+        bearish_score += SCORES["VWAP"]
 
-
+    # ==========================================
     # BOS
+    # ==========================================
 
-    bos = data.bos
+    if data.bos == "BULLISH":
+        bullish_score += SCORES["BOS"]
 
-    if bos == "BULLISH":
-        bullish_score += 20
+    elif data.bos == "BEARISH":
+        bearish_score += SCORES["BOS"]
 
-    elif bos == "BEARISH":
-        bearish_score += 20    
-
+    # ==========================================
     # CHoCH
+    # ==========================================
 
-    choch = check_choch(data)
+    if data.choch == "BULLISH":
+        bullish_score += SCORES["CHOCH"]
 
-    if choch == "BULLISH":
-        bullish_score += 15
+    elif data.choch == "BEARISH":
+        bearish_score += SCORES["CHOCH"]
 
-    elif choch == "BEARISH":
-        bearish_score += 15    
-
-
+    # ==========================================
     # FVG
+    # ==========================================
 
-    if check_fvg(data):
-        bullish_score += 10
+    if data.fvg == "BULLISH":
+        bullish_score += SCORES["FVG"]
 
+    elif data.fvg == "BEARISH":
+        bearish_score += SCORES["FVG"]
+
+    # ==========================================
     # Order Block
+    # ==========================================
 
-    if check_order_block(data):
-        bullish_score += 10
+    if data.order_block == "BULLISH":
+        bullish_score += SCORES["ORDER_BLOCK"]
 
+    elif data.order_block == "BEARISH":
+        bearish_score += SCORES["ORDER_BLOCK"]
+
+    # ==========================================
+    # Liquidity Sweep
+    # ==========================================
+
+    if data.liquidity == "BULLISH":
+        bullish_score += SCORES["LIQUIDITY"]
+
+    elif data.liquidity == "BEARISH":
+        bearish_score += SCORES["LIQUIDITY"]
+
+    # ==========================================
     # Option Chain
+    # ==========================================
 
     option = check_option_chain(data)
 
     if option["bullish"]:
-        bullish_score += 20
+        bullish_score += SCORES["OPTION_CHAIN"]
 
     if option["bearish"]:
-        bearish_score += 20
+        bearish_score += SCORES["OPTION_CHAIN"]
 
+    # ==========================================
     # Volume
+    # ==========================================
 
-    if check_volume(data):
-        bullish_score += 15
-        bearish_score += 15
+    if data.volume_signal == "BULLISH":
+        bullish_score += SCORES["VOLUME"]
+
+    elif data.volume_signal == "BEARISH":
+        bearish_score += SCORES["VOLUME"]
+
+    # ==========================================
+    # Final Score
+    # ==========================================
 
     return {
         "bullish": bullish_score,
