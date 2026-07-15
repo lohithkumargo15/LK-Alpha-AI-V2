@@ -1,27 +1,54 @@
+"""
+=========================================================
+
+File : settings.py
+
+Purpose:
+Central configuration for LK Alpha AI.
+
+Reads secrets from .env file.
+
+Developer : Lohith Kumar
+
+=========================================================
+"""
+
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env
+load_dotenv()
+
 # ==========================================
-# LK Alpha AI - Project Settings
+# Project Information
 # ==========================================
 
 PROJECT_NAME = "LK Alpha AI"
+
 PROJECT_DESCRIPTION = "AI Powered Intraday Trading Assistant"
+
 VERSION = "2.0.0"
 
 DEVELOPER = "Lohith Kumar"
+
 TECHNICAL_LEAD = "ChatGPT"
-
-# Future Configuration
-
-TELEGRAM_BOT_TOKEN = "8686437470:AAFCqAAfnwpvfa45x9vZ3UK8kbau50VfAaU"
-TELEGRAM_CHAT_ID = "6088677751"
-
-TRADINGVIEW_WEBHOOK_SECRET = "LKALPHA2026"
-
-APP_MODE = "DEVELOPMENT"
 
 # ==========================================
 # Telegram Configuration
 # ==========================================
 
-TELEGRAM_BOT_TOKEN = "8686437470:AAFCqAAfnwpvfa45x9vZ3UK8kbau50VfAaU"
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
-TELEGRAM_CHAT_ID = "6088677751"
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+
+# ==========================================
+# TradingView Configuration
+# ==========================================
+
+TRADINGVIEW_WEBHOOK_SECRET = os.getenv("TRADINGVIEW_WEBHOOK_SECRET")
+
+# ==========================================
+# Application
+# ==========================================
+
+APP_MODE = "DEVELOPMENT"
