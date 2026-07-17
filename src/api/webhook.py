@@ -19,6 +19,7 @@ from src.ai.decision_engine import make_decision
 from src.risk.risk_manager import calculate_risk
 from src.ai.trade_validator import validate_trade
 from src.ai.health_engine import get_health
+from src.services.telegram_service import send_telegram_message
 
 router = APIRouter(
     prefix="/webhook",
@@ -51,7 +52,7 @@ def tradingview_webhook(data: MarketInput):
     )
 
     # -------------------------------
-    # Risk
+    # Risk Management
     # -------------------------------
 
     risk = calculate_risk(
@@ -60,14 +61,39 @@ def tradingview_webhook(data: MarketInput):
     )
 
     # -------------------------------
-    # Health
+    # Market Health
     # -------------------------------
 
     health = get_health(data)
 
     # -------------------------------
-    # Response
+    # Telegram Notification
     # -------------------------------
+
+    if validation["valid"]:
+
+        message = f"""
+🚀 LK Alpha AI
+
+📈 Symbol : {data.symbol}
+
+📢 Signal : {decision.signal}
+
+🎯 Confidence : {decision.confidence}%
+
+💰 Entry : {risk['entry']}
+🛑 Stop Loss : {risk['stop_loss']}
+🎯 Target 1 : {risk['target_1']}
+🎯 Target 2 : {risk['target_2']}
+
+📊 Trend : {market.trend}
+💪 Strength : {market.strength}
+
+📝 Reason:
+{decision.reason}
+"""
+
+        send_telegram_message(message)
 
     return {
 
