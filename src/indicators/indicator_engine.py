@@ -11,15 +11,15 @@ Developer : Lohith Kumar
 ========================================================
 """
 
-from src.ema import calculate_ema
-from src.vwap import calculate_vwap
-from src.atr import calculate_atr
-from src.bos import check_bos
-from src.choch import check_choch
-from src.fvg import check_fvg
-from src.order_block import check_order_block
-from src.liquidity import check_liquidity
-from src.volume import check_volume
+from src.indicators.ema import calculate_ema
+from src.indicators.vwap import calculate_vwap
+from src.indicators.atr import calculate_atr
+from src.indicators.bos import check_bos
+from src.indicators.choch import check_choch
+from src.indicators.fvg import check_fvg
+from src.indicators.order_block import check_order_block
+from src.indicators.liquidity import check_liquidity
+from src.indicators.volume import check_volume
 
 
 def calculate_indicators(candles):

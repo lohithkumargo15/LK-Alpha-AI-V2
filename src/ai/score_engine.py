@@ -11,9 +11,9 @@ Developer : Lohith Kumar
 ========================================================
 """
 
-from src.ema import check_ema
-from src.vwap import check_vwap
-from src.option_chain import check_option_chain
+from src.indicators.ema import check_ema
+from src.indicators.vwap import check_vwap
+from src.indicators.option_chain import check_option_chain
 
 from config.scores import SCORES
 

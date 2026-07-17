@@ -1,6 +1,6 @@
 from src.models import MarketData, MarketInput
-from src.score_engine import calculate_score
-from src.market_strength import calculate_market_strength
+from src.ai.score_engine import calculate_score
+from src.ai.market_strength import calculate_market_strength
 
 
 def analyze_market(data: MarketInput) -> MarketData:

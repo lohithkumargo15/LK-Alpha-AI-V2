@@ -13,11 +13,12 @@ Developer : Lohith Kumar
 
 from fastapi import APIRouter
 
-from src.tradingview_service import get_market_data
-from src.market_analyzer import analyze_market
-from src.decision_engine import make_decision
-from src.risk_manager import calculate_risk
-from src.health_engine import get_health
+
+from src.ai.market_analyzer import analyze_market
+from src.ai.decision_engine import make_decision
+from src.risk.risk_manager import calculate_risk
+from src.ai.health_engine import get_health
+from src.services.tradingview_service import get_market_data
 
 router = APIRouter()
 
@@ -79,7 +80,11 @@ def analyze(symbol: str):
             "fvg": market_input.fvg,
             "order_block": market_input.order_block,
             "liquidity": market_input.liquidity,
-            "volume_signal": market_input.volume_signal
+            "volume_signal": market_input.volume_signal,
+
+            # NEW
+            "support": market_input.support,
+            "resistance": market_input.resistance
         },
 
         "market": market.model_dump(),

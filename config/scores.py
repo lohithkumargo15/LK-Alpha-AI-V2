@@ -1,24 +1,25 @@
 """
-=========================================================
+========================================================
 
 File : scores.py
 
 Purpose:
-Centralized score configuration
-for LK Alpha AI.
+Central Score Configuration
 
 Developer : Lohith Kumar
 
-=========================================================
+========================================================
 """
 
 SCORES = {
 
-    "EMA": 25,
+    "EMA": 10,
 
-    "VWAP": 20,
+    "VWAP": 10,
 
-    "BOS": 20,
+    "ATR": 5,
+
+    "BOS": 15,
 
     "CHOCH": 15,
 
@@ -26,10 +27,10 @@ SCORES = {
 
     "ORDER_BLOCK": 10,
 
-    "LIQUIDITY": 15,
+    "LIQUIDITY": 10,
 
-    "OPTION_CHAIN": 20,
+    "OPTION_CHAIN": 10,
 
-    "VOLUME": 15
+    "VOLUME": 5
 
 }
