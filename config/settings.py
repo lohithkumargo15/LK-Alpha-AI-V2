@@ -8,6 +8,12 @@ Developer : Lohith Kumar
 ========================================================
 """
 
+import os
+from dotenv import load_dotenv
+
+# Load variables from .env
+load_dotenv()
+
 PROJECT_NAME = "LK Alpha AI"
 
 PROJECT_DESCRIPTION = "AI Powered Intraday Trading Assistant"
@@ -22,8 +28,6 @@ TECHNICAL_LEAD = "ChatGPT"
 # Telegram Configuration
 # ==========================================
 
-# Paste your BOT TOKEN here
-TELEGRAM_BOT_TOKEN = "8686437470:AAFSo3uNZWwrCyGDtrYuFtRjybfxRjeYGMs"
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 
-# Your Chat ID
-TELEGRAM_CHAT_ID = "6088677751"
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
